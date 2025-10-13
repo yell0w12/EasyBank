@@ -1,0 +1,33 @@
+# Test 11: Multiple users with various transaction scenarios
+login david 999888 10.0.0.1
+login emma 777666 10.0.0.2
+login frank 555444 10.0.0.3
+login grace 333222 10.0.0.4
+# David sends to Emma
+p 05:06:08:00:00:00 10.0.0.1 david emma 15000 05:06:08:01:00:00 o
+# Emma sends to Frank (shared fee)
+p 05:06:08:00:00:05 10.0.0.2 emma frank 8000 05:06:08:02:00:00 s
+# Frank sends to Grace
+p 05:06:08:00:00:10 10.0.0.3 frank grace 20000 05:06:08:03:00:00 o
+# Grace sends to David (shared fee)
+p 05:06:08:00:00:15 10.0.0.4 grace david 12000 05:06:08:04:00:00 s
+# Check balances
+b david 10.0.0.1
+b emma 10.0.0.2
+b frank 10.0.0.3
+b grace 10.0.0.4
+# Logout all users
+o david 10.0.0.1
+o emma 10.0.0.2
+o frank 10.0.0.3
+o grace 10.0.0.4
+$$$
+l 05:06:08:00:00:00 05:06:09:00:00:00
+r 05:06:08:00:00:00 05:06:09:00:00:00
+h david
+h emma
+h frank
+h grace
+s 05:06:08:00:00:00
+
+
